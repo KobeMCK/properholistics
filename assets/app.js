@@ -85,16 +85,15 @@
 
   function productCard(p) {
     return `
-      <li class="group flex w-[calc(50%-0.75rem)] flex-col items-center text-center md:w-[calc(25%-1.875rem)] lg:w-[calc(20%-2rem)]">
-        <div class="mb-5 flex aspect-square w-full items-center justify-center p-4">
-          <img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy" class="max-h-full w-auto object-contain mix-blend-multiply">
-        </div>
-        <h4>${p.name}</h4>
-        <p class="mt-1 text-mute">${p.brand}${p.certified ? " &middot; NSF Sport" : ""}</p>
-        <p class="mt-1 text-mute">${p.format}</p>
-        <p class="mt-1">${money(p.price)}</p>
-        <button type="button" data-add-product="${p.id}" class="mt-2 text-mute underline-offset-4 hover:text-ink hover:underline md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100">
-          Add to cart<span class="sr-only">: ${p.name}</span>
+      <li class="w-[calc(50%-0.75rem)] md:w-[calc(25%-1.875rem)] lg:w-[calc(20%-2rem)]">
+        <button type="button" data-product="${p.id}" aria-haspopup="dialog" class="group flex w-full cursor-pointer flex-col items-center text-center">
+          <span class="mb-5 flex aspect-square w-full items-center justify-center p-4">
+            <img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy" class="max-h-full w-auto object-contain mix-blend-multiply transition-transform duration-300 ease-out group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none">
+          </span>
+          <span>${p.name}</span>
+          <span class="mt-1 text-mute">${p.brand}${p.certified ? " &middot; NSF Sport" : ""}</span>
+          <span class="mt-1 text-mute">${p.format}</span>
+          <span class="mt-1">${money(p.price)}</span>
         </button>
       </li>`;
   }
@@ -132,8 +131,8 @@
       .map(
         (s) => `
       <li>
-        <button type="button" data-stack="${s.id}" class="group flex w-full flex-col items-center text-center">
-          <span class="relative mb-5 block aspect-[4/3] w-3/4">${bundle(s)}</span>
+        <button type="button" data-stack="${s.id}" aria-haspopup="dialog" class="group flex w-full cursor-pointer flex-col items-center text-center">
+          <span class="relative mb-5 block aspect-[4/3] w-3/4 transition-transform duration-300 ease-out group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none">${bundle(s)}</span>
           <span>${s.name} Stack</span>
           <span class="mt-1 text-mute">${stackProducts(s).map((p) => p.name).join(" + ")}</span>
           <span class="mt-1"><s class="text-mute">${money(stackRetail(s))}</s> ${money(stackPrice(s))}</span>
@@ -175,6 +174,39 @@
               <span><s class="text-mute">${money(stackRetail(s))}</s> ${money(stackPrice(s))}</span>
             </div>
             <button type="button" data-add-stack="${s.id}" class="bg-ink py-3.5 text-paper transition hover:opacity-85">Add to cart</button>
+          </div>
+        </div>
+      </div>`;
+    document.getElementById("stack-dialog").showModal();
+  }
+
+  function openProduct(id) {
+    const p = productById[id];
+    document.getElementById("stack-dialog-body").innerHTML = `
+      <div class="grid md:grid-cols-2">
+        <div class="hidden items-center justify-center p-10 md:flex">
+          <img src="${p.image}" alt="${p.brand} ${p.name}" class="max-h-80 w-auto object-contain mix-blend-multiply">
+        </div>
+        <div class="flex max-h-[85vh] flex-col gap-6 overflow-y-auto p-8">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex flex-col gap-1">
+              <h2 id="stack-dialog-title" class="text-sm font-medium">${p.name}</h2>
+              <p class="text-mute">${p.brand}${p.certified ? " &middot; NSF Certified for Sport" : ""}</p>
+            </div>
+            <button type="button" data-close class="text-mute hover:text-ink">Close</button>
+          </div>
+          <img src="${p.image}" alt="" class="mx-auto max-h-48 w-auto object-contain mix-blend-multiply md:hidden">
+          <p class="leading-relaxed text-pretty">${window.PH_DESCRIPTIONS[p.id] || ""}</p>
+          <dl class="flex flex-col gap-2 text-mute">
+            <div class="flex justify-between gap-4"><dt>Format</dt><dd class="text-ink">${p.format}</dd></div>
+            <div class="flex justify-between gap-4"><dt>Category</dt><dd class="text-ink">${p.category}</dd></div>
+          </dl>
+          <div class="mt-auto flex flex-col gap-4">
+            <div class="flex items-baseline justify-between">
+              <span class="text-mute">Price</span>
+              <span>${money(p.price)}</span>
+            </div>
+            <button type="button" data-add-product="${p.id}" class="bg-ink py-3.5 text-paper transition hover:opacity-85">Add to cart</button>
           </div>
         </div>
       </div>`;
@@ -248,6 +280,8 @@
     }
     if (t.dataset.stack) {
       openStack(t.dataset.stack);
+    } else if (t.dataset.product) {
+      openProduct(t.dataset.product);
     } else if (t.dataset.filter) {
       const { filter, value } = t.dataset;
       filters[filter] = filter === "brand" && filters.brand === value ? "All" : value;
@@ -258,6 +292,7 @@
       renderFilters();
       renderProducts();
     } else if (t.dataset.addProduct) {
+      document.getElementById("stack-dialog").close();
       addToCart("product", t.dataset.addProduct);
     } else if (t.dataset.addStack) {
       document.getElementById("stack-dialog").close();
