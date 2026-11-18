@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <title>Proper Holistics | Professional-Grade Supplements</title>
-    <meta name="description" content="Practitioner-grade supplements from Thorne, Designs for Health, Designs for Sport and AOR, curated by Registered Massage Therapists.">
+    <meta name="description" content="Practitioner-grade supplements from Thorne, Designs for Health, Designs for Sport, Klean Athlete and AOR, curated by Registered Massage Therapists.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -40,15 +40,13 @@
             <p class="text-center text-mute text-balance">Practitioner-grade supplements, curated by Registered Massage Therapists.</p>
         </section>
 
-        <section id="shop" aria-label="Shop" class="scroll-mt-16 px-6 pb-32 md:px-10">
-            <div class="mb-14 flex flex-col items-center gap-3 text-center">
-                <div id="category-filters" role="group" aria-label="Filter by supplement type" class="flex flex-wrap justify-center gap-x-5 gap-y-2"></div>
-                <div class="flex flex-wrap justify-center gap-x-5 gap-y-2">
-                    <div id="brand-filters" role="group" aria-label="Filter by brand" class="contents"></div>
-                    <button type="button" id="certified-filter" aria-pressed="false">NSF Certified for Sport</button>
-                </div>
+        <section id="shop" aria-label="Shop" class="scroll-mt-16 pb-16">
+            <nav id="category-nav" aria-label="Shop by type" class="sticky top-[60px] z-20 flex justify-start gap-x-6 overflow-x-auto whitespace-nowrap bg-paper px-6 py-3 md:justify-center md:px-10"></nav>
+            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 px-6 pb-4 pt-1 md:px-10">
+                <div id="brand-filters" role="group" aria-label="Filter by brand" class="contents"></div>
+                <button type="button" id="certified-filter" aria-pressed="false">NSF Certified for Sport</button>
             </div>
-            <ul id="products-grid" class="grid grid-cols-2 gap-x-6 gap-y-16 md:grid-cols-4 lg:grid-cols-5 md:gap-x-10"></ul>
+            <div id="shop-sections" class="flex flex-col"></div>
         </section>
 
         <section id="stacks" aria-labelledby="stacks-heading" class="scroll-mt-16 px-6 pb-32 md:px-10">

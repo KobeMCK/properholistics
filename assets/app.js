@@ -13,7 +13,7 @@
   const stackRetail = (s) => stackProducts(s).reduce((sum, p) => sum + p.price, 0);
   const stackPrice = (s) => Math.round(stackRetail(s) * (1 - discount) * 100) / 100;
 
-  const filters = { brand: "All", category: "All", certified: false };
+  const filters = { brand: "All", certified: false };
   let cart = loadCart();
 
   // Packshots grouped on a shared floor so each stack reads as a real bundle.
@@ -60,46 +60,69 @@
     saveCart();
   }
 
+  const staples = window.PH_STAPLES;
+  const sectionOrder = [...staples, ...categories.filter((c) => !staples.includes(c))];
+  const slug = (c) => `shop-${c.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+
   function filterButton(group, value) {
     const active = filters[group] === value;
     return `<button type="button" data-filter="${group}" data-value="${value}" aria-pressed="${active}"
       class="${active ? "text-ink underline underline-offset-4" : "text-mute hover:text-ink"}">${value}</button>`;
   }
 
+  function visibleProducts() {
+    return products.filter(
+      (p) => (filters.brand === "All" || p.brand === filters.brand) && (!filters.certified || p.certified)
+    );
+  }
+
   function renderFilters() {
-    document.getElementById("category-filters").innerHTML = ["All", ...categories].map((c) => filterButton("category", c)).join("");
     document.getElementById("brand-filters").innerHTML = brands.map((b) => filterButton("brand", b)).join("");
     const cert = document.getElementById("certified-filter");
     cert.setAttribute("aria-pressed", String(filters.certified));
     cert.className = filters.certified ? "text-ink underline underline-offset-4" : "text-mute hover:text-ink";
   }
 
-  function renderProducts() {
-    const list = products.filter(
-      (p) =>
-        (filters.brand === "All" || p.brand === filters.brand) &&
-        (filters.category === "All" || p.category === filters.category) &&
-        (!filters.certified || p.certified)
-    );
-    const grid = document.getElementById("products-grid");
-    if (!list.length) {
-      grid.innerHTML = `<li class="col-span-full py-16 text-center text-mute">Nothing matches those filters.</li>`;
-      return;
-    }
-    grid.innerHTML = list
-      .map(
-        (p) => `
-      <li class="group flex flex-col items-center text-center">
+  function productCard(p) {
+    return `
+      <li class="group flex w-[calc(50%-0.75rem)] flex-col items-center text-center md:w-[calc(25%-1.875rem)] lg:w-[calc(20%-2rem)]">
         <div class="mb-5 flex aspect-square w-full items-center justify-center p-4">
           <img src="${p.image}" alt="${p.brand} ${p.name}" loading="lazy" class="max-h-full w-auto object-contain mix-blend-multiply">
         </div>
-        <h3>${p.name}</h3>
+        <h4>${p.name}</h4>
         <p class="mt-1 text-mute">${p.brand}${p.certified ? " &middot; NSF Sport" : ""}</p>
+        <p class="mt-1 text-mute">${p.format}</p>
         <p class="mt-1">${money(p.price)}</p>
         <button type="button" data-add-product="${p.id}" class="mt-2 text-mute underline-offset-4 hover:text-ink hover:underline md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100">
           Add to cart<span class="sr-only">: ${p.name}</span>
         </button>
-      </li>`
+      </li>`;
+  }
+
+  function renderProducts() {
+    const list = visibleProducts();
+    const groups = sectionOrder
+      .map((c) => ({ category: c, items: list.filter((p) => p.category === c) }))
+      .filter((g) => g.items.length);
+
+    document.getElementById("category-nav").innerHTML = groups
+      .map((g) => `<a href="#${slug(g.category)}" class="${staples.includes(g.category) ? "text-ink" : "text-mute"} hover:underline hover:underline-offset-4">${g.category}</a>`)
+      .join("");
+
+    const root = document.getElementById("shop-sections");
+    if (!groups.length) {
+      root.innerHTML = `<p class="px-6 py-16 text-center text-mute">Nothing matches those filters.</p>`;
+      return;
+    }
+    root.innerHTML = groups
+      .map(
+        (g) => `
+      <section id="${slug(g.category)}" aria-labelledby="${slug(g.category)}-h" class="scroll-mt-28 px-6 pb-12 pt-8 md:px-10">
+        <h3 id="${slug(g.category)}-h" class="mb-6 text-center text-sm font-medium">${g.category}</h3>
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-14 md:gap-x-10">
+          ${g.items.map(productCard).join("")}
+        </ul>
+      </section>`
       )
       .join("");
   }

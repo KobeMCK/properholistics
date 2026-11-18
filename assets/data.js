@@ -1,4 +1,4 @@
-window.PH_BRANDS = ["Thorne", "Designs for Health", "Designs for Sport", "AOR"];
+window.PH_BRANDS = ["Thorne", "Designs for Health", "Designs for Sport", "Klean Athlete", "AOR"];
 
 // The research-backed essentials, in order of how often they're bought and studied.
 window.PH_CATEGORIES = [
@@ -15,12 +15,16 @@ window.PH_CATEGORIES = [
   "Specialty",
 ];
 
+// Shown first and kept one tap away in the shop navigation.
+window.PH_STAPLES = ["Creatine", "Protein", "Electrolytes", "Magnesium", "Omega-3", "Vitamin D"];
+
 window.PH_STACK_DISCOUNT = 0.1;
 
 // certified: NSF Certified for Sport (tested for substances banned by WADA / USADA / NCAA).
 window.PH_PRODUCTS = [
-  { id: "dfs-creatine-monohydrate", brand: "Designs for Sport", category: "Creatine", certified: true, name: "Creatine Monohydrate", format: "Powder, 60 servings", price: 49, image: "images/products/dfs-creatine-monohydrate.webp" },
-  { id: "thorne-creatine", brand: "Thorne", category: "Creatine", certified: true, name: "Creatine", format: "Powder, 90 servings", price: 58, image: "images/products/thorne-creatine.webp" },
+  { id: "klean-creatine", brand: "Klean Athlete", category: "Creatine", certified: true, name: "Klean Creatine", format: "Creapure\u00ae powder, 315 g", price: 36, image: "images/products/klean-creatine.jpg" },
+  { id: "dfs-creatine-monohydrate", brand: "Designs for Sport", category: "Creatine", certified: true, name: "Creatine Monohydrate", format: "Powder, 60 servings", price: 45, image: "images/products/dfs-creatine-monohydrate.webp" },
+  { id: "thorne-creatine", brand: "Thorne", category: "Creatine", certified: true, name: "Creatine", format: "Powder, 90 servings", price: 52, image: "images/products/thorne-creatine.webp" },
 
   { id: "dfs-hydrolyzed-whey-protein", brand: "Designs for Sport", category: "Protein", certified: true, name: "Hydrolyzed Whey Protein", format: "Vanilla, 600 g", price: 89, image: "images/products/dfs-hydrolyzed-whey-protein.webp" },
   { id: "dfs-hydrolyzed-iso-whey-protein", brand: "Designs for Sport", category: "Protein", certified: true, name: "Hydrolyzed ISO-Whey Protein", format: "Powder", price: 95, image: "images/products/dfs-hydrolyzed-iso-whey-protein.webp" },
@@ -83,7 +87,7 @@ window.PH_STACKS = [
     tagline: "Certified for competition.",
     summary: "For varsity and pro athletes under USADA, WADA or U SPORTS testing. Both products are NSF Certified for Sport.",
     items: [
-      { id: "dfs-creatine-monohydrate", note: "The most researched supplement for strength and power." },
+      { id: "klean-creatine", note: "Creapure creatine, the most researched supplement for strength and power." },
       { id: "dfs-hydration-packs", note: "Sugar-free sodium, potassium and magnesium." },
     ],
   },
