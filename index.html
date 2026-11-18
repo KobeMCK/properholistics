@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <title>Proper Holistics | Professional-Grade Supplements &amp; Stacks</title>
-    <meta name="description" content="Practitioner-grade supplements from Thorne, Designs for Health and AOR, assembled into Sleep, Recovery, Beauty, Calm and Foundation stacks by Registered Massage Therapists.">
+    <meta name="description" content="Practitioner-grade supplements from Thorne, Designs for Health, Designs for Sport and AOR, assembled into Performance, Recovery, Sleep, Beauty, Calm and Foundation stacks by Registered Massage Therapists.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -59,19 +59,30 @@
                     <h2 id="stacks-heading" class="text-2xl font-medium tracking-tight">Stacks</h2>
                     <p class="mt-2 max-w-md text-sm leading-relaxed text-mute text-pretty">Protocols we recommend in the treatment room, assembled across brands. Every stack is 10% less than buying separately.</p>
                 </div>
-                <p class="font-mono text-[11px] uppercase tracking-wider text-mute">5 protocols</p>
+                <p id="stacks-count" class="font-mono text-[11px] uppercase tracking-wider text-mute"></p>
             </div>
-            <ul id="stacks-grid" class="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-5 md:gap-x-6"></ul>
+            <ul id="stacks-grid" class="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6"></ul>
         </section>
 
         <!-- Shop -->
         <section id="shop" aria-labelledby="shop-heading" class="scroll-mt-20 border-t border-line px-6 py-16 md:px-8">
-            <div class="mb-10 flex flex-col gap-4 border-b border-line pb-4 md:flex-row md:items-end md:justify-between">
-                <div class="flex items-baseline gap-4">
-                    <h2 id="shop-heading" class="text-2xl font-medium tracking-tight">Shop</h2>
-                    <span id="product-count" class="font-mono text-[11px] uppercase tracking-wider text-mute"></span>
+            <div class="mb-10 flex flex-col gap-6 border-b border-line pb-6">
+                <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                    <div class="flex items-baseline gap-4">
+                        <h2 id="shop-heading" class="text-2xl font-medium tracking-tight">Shop</h2>
+                        <span id="product-count" class="font-mono text-[11px] uppercase tracking-wider text-mute"></span>
+                    </div>
+                    <button type="button" id="certified-filter" aria-pressed="false">
+                        <span data-box aria-hidden="true"></span>
+                        NSF Certified for Sport only
+                    </button>
                 </div>
-                <div id="brand-filters" role="group" aria-label="Filter by brand" class="flex flex-wrap gap-5"></div>
+                <div class="grid gap-3 md:grid-cols-[6rem_1fr]">
+                    <p class="font-mono text-[11px] uppercase tracking-wider text-mute">Essentials</p>
+                    <div id="category-filters" role="group" aria-label="Filter by supplement type" class="flex flex-wrap gap-x-5 gap-y-2"></div>
+                    <p class="font-mono text-[11px] uppercase tracking-wider text-mute">Brand</p>
+                    <div id="brand-filters" role="group" aria-label="Filter by brand" class="flex flex-wrap gap-x-5 gap-y-2"></div>
+                </div>
             </div>
             <ul id="products-grid" class="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8"></ul>
         </section>
@@ -82,6 +93,7 @@
                 <h2 id="about-heading" class="font-mono text-[11px] uppercase tracking-wider text-mute">About</h2>
                 <div class="flex max-w-2xl flex-col gap-4 text-lg leading-relaxed text-pretty">
                     <p>Proper Holistics is run by Registered Massage Therapists. We carry practitioner-only lines &mdash; the formulations normally sold through clinics, not shelves &mdash; and pair them the way we would for a client after treatment.</p>
+                    <p class="text-base text-mute">Competing athletes: products marked NSF Sport are NSF Certified for Sport, lot-tested for substances banned by WADA, USADA and the NCAA. Always verify the current lot at nsfsport.com before use.</p>
                     <p class="text-sm text-mute">These products are not intended to diagnose, treat, cure or prevent any disease. Speak with your healthcare provider before starting a new supplement, especially if you are pregnant, nursing or taking medication.</p>
                 </div>
             </div>
@@ -91,7 +103,7 @@
     <!-- Footer -->
     <footer id="contact" class="flex flex-col gap-6 border-t border-line px-6 py-12 text-xs text-mute md:flex-row md:items-center md:justify-between md:px-8">
         <p>&copy; 2026 Proper Holistics. All rights reserved.</p>
-        <p class="font-mono uppercase tracking-wider">Thorne &middot; Designs for Health &middot; AOR</p>
+        <p class="font-mono uppercase tracking-wider">Thorne &middot; Designs for Health &middot; Designs for Sport &middot; AOR</p>
         <div class="flex gap-6">
             <a href="#" class="hover:text-ink">Privacy Policy</a>
             <a href="#" class="hover:text-ink">Terms of Service</a>
