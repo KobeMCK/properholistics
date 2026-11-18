@@ -4,131 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
-    <title>Proper Holistics | Professional-Grade Supplements &amp; Stacks</title>
-    <meta name="description" content="Practitioner-grade supplements from Thorne, Designs for Health, Designs for Sport and AOR, assembled into Performance, Recovery, Sleep, Beauty, Calm and Foundation stacks by Registered Massage Therapists.">
+    <title>Proper Holistics | Professional-Grade Supplements</title>
+    <meta name="description" content="Practitioner-grade supplements from Thorne, Designs for Health, Designs for Sport and AOR, curated by Registered Massage Therapists.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
         @theme {
             --color-paper: #ffffff;
             --color-ink: #111111;
-            --color-mute: #6f6f6c;
-            --color-line: #e7e7e4;
-            --color-wash: #f4f4f2;
+            --color-mute: #8a8a87;
+            --color-line: #ececea;
             --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-            --font-mono: "IBM Plex Mono", ui-monospace, monospace;
         }
-        dialog::backdrop { background: rgb(17 17 17 / 0.35); }
+        dialog::backdrop { background: rgb(255 255 255 / 0.85); }
         html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="bg-paper font-sans text-ink antialiased selection:bg-ink selection:text-paper">
+<body class="bg-paper font-sans text-xs text-ink antialiased selection:bg-ink selection:text-paper">
 
-    <!-- Header -->
-    <header class="sticky top-0 z-30 grid grid-cols-[1fr_auto_1fr] items-center gap-4 border-b border-line bg-paper/95 px-6 py-5 backdrop-blur md:px-8">
-        <nav aria-label="Primary" class="flex gap-5 text-xs md:gap-7">
-            <a href="#stacks" class="hover:text-mute">Stacks</a>
+    <header class="sticky top-0 z-30 flex items-center justify-between bg-paper px-6 py-5 md:px-10">
+        <a href="#top" class="text-sm font-medium tracking-tight">properholistics</a>
+        <nav aria-label="Primary" class="flex items-center gap-6">
             <a href="#shop" class="hover:text-mute">Shop</a>
+            <a href="#stacks" class="hover:text-mute">Stacks</a>
             <a href="#about" class="hidden hover:text-mute sm:inline">About</a>
-        </nav>
-        <a href="#top" class="text-lg font-semibold tracking-tighter md:text-xl">properholistics</a>
-        <div class="flex items-center justify-end gap-5 text-xs">
-            <a href="#contact" class="hidden hover:text-mute sm:inline">Contact</a>
             <button type="button" data-open-cart class="hover:text-mute">Cart (<span id="cart-count">0</span>)</button>
-        </div>
+        </nav>
     </header>
 
     <main id="top">
-        <!-- Hero -->
-        <section class="mx-auto flex max-w-6xl flex-col items-center px-6 pb-24 pt-12">
-            <div class="aspect-[4/5] w-full max-w-xl overflow-hidden bg-wash">
-                <img src="images/running_girl.png" alt="A runner in motion, photographed in soft monochrome light" class="h-full w-full object-cover grayscale contrast-125">
-            </div>
-            <div class="mt-6 flex w-full max-w-xl items-baseline justify-between gap-4 font-mono text-[11px] uppercase tracking-wider text-mute">
-                <span>Curated by Registered Massage Therapists</span>
-                <a href="#stacks" class="text-ink hover:underline">Shop Stacks</a>
-            </div>
+        <section class="flex flex-col items-center gap-6 px-6 pb-24 pt-8 md:pb-32">
+            <img src="images/running_girl.png" alt="A runner in motion, photographed in soft monochrome light" class="aspect-[4/5] w-full max-w-xs object-cover grayscale md:max-w-sm">
+            <p class="text-center text-mute text-balance">Practitioner-grade supplements, curated by Registered Massage Therapists.</p>
         </section>
 
-        <!-- Stacks -->
-        <section id="stacks" aria-labelledby="stacks-heading" class="scroll-mt-20 border-t border-line px-6 py-16 md:px-8">
-            <div class="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <div>
-                    <h2 id="stacks-heading" class="text-2xl font-medium tracking-tight">Stacks</h2>
-                    <p class="mt-2 max-w-md text-sm leading-relaxed text-mute text-pretty">Protocols we recommend in the treatment room, assembled across brands. Every stack is 10% less than buying separately.</p>
-                </div>
-                <p id="stacks-count" class="font-mono text-[11px] uppercase tracking-wider text-mute"></p>
-            </div>
-            <ul id="stacks-grid" class="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6"></ul>
-        </section>
-
-        <!-- Shop -->
-        <section id="shop" aria-labelledby="shop-heading" class="scroll-mt-20 border-t border-line px-6 py-16 md:px-8">
-            <div class="mb-10 flex flex-col gap-6 border-b border-line pb-6">
-                <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                    <div class="flex items-baseline gap-4">
-                        <h2 id="shop-heading" class="text-2xl font-medium tracking-tight">Shop</h2>
-                        <span id="product-count" class="font-mono text-[11px] uppercase tracking-wider text-mute"></span>
-                    </div>
-                    <button type="button" id="certified-filter" aria-pressed="false">
-                        <span data-box aria-hidden="true"></span>
-                        NSF Certified for Sport only
-                    </button>
-                </div>
-                <div class="grid gap-3 md:grid-cols-[6rem_1fr]">
-                    <p class="font-mono text-[11px] uppercase tracking-wider text-mute">Essentials</p>
-                    <div id="category-filters" role="group" aria-label="Filter by supplement type" class="flex flex-wrap gap-x-5 gap-y-2"></div>
-                    <p class="font-mono text-[11px] uppercase tracking-wider text-mute">Brand</p>
-                    <div id="brand-filters" role="group" aria-label="Filter by brand" class="flex flex-wrap gap-x-5 gap-y-2"></div>
+        <section id="shop" aria-label="Shop" class="scroll-mt-16 px-6 pb-32 md:px-10">
+            <div class="mb-14 flex flex-col items-center gap-3 text-center">
+                <div id="category-filters" role="group" aria-label="Filter by supplement type" class="flex flex-wrap justify-center gap-x-5 gap-y-2"></div>
+                <div class="flex flex-wrap justify-center gap-x-5 gap-y-2">
+                    <div id="brand-filters" role="group" aria-label="Filter by brand" class="contents"></div>
+                    <button type="button" id="certified-filter" aria-pressed="false">NSF Certified for Sport</button>
                 </div>
             </div>
-            <ul id="products-grid" class="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8"></ul>
+            <ul id="products-grid" class="grid grid-cols-2 gap-x-6 gap-y-16 md:grid-cols-4 lg:grid-cols-5 md:gap-x-10"></ul>
         </section>
 
-        <!-- About -->
-        <section id="about" aria-labelledby="about-heading" class="scroll-mt-20 border-t border-line px-6 py-16 md:px-8">
-            <div class="grid gap-10 md:grid-cols-[1fr_2fr]">
-                <h2 id="about-heading" class="font-mono text-[11px] uppercase tracking-wider text-mute">About</h2>
-                <div class="flex max-w-2xl flex-col gap-4 text-lg leading-relaxed text-pretty">
-                    <p>Proper Holistics is run by Registered Massage Therapists. We carry practitioner-only lines &mdash; the formulations normally sold through clinics, not shelves &mdash; and pair them the way we would for a client after treatment.</p>
-                    <p class="text-base text-mute">Competing athletes: products marked NSF Sport are NSF Certified for Sport, lot-tested for substances banned by WADA, USADA and the NCAA. Always verify the current lot at nsfsport.com before use.</p>
-                    <p class="text-sm text-mute">These products are not intended to diagnose, treat, cure or prevent any disease. Speak with your healthcare provider before starting a new supplement, especially if you are pregnant, nursing or taking medication.</p>
-                </div>
+        <section id="stacks" aria-labelledby="stacks-heading" class="scroll-mt-16 px-6 pb-32 md:px-10">
+            <div class="mb-14 flex flex-col items-center gap-2 text-center">
+                <h2 id="stacks-heading" class="text-sm font-medium">Stacks</h2>
+                <p class="text-mute text-balance">Two products we pair in the treatment room. 10% less than buying separately.</p>
+            </div>
+            <ul id="stacks-grid" class="grid grid-cols-2 gap-x-6 gap-y-16 md:grid-cols-3 md:gap-x-10"></ul>
+        </section>
+
+        <section id="about" aria-labelledby="about-heading" class="scroll-mt-16 px-6 pb-32 md:px-10">
+            <div class="mx-auto flex max-w-md flex-col gap-4 text-center leading-relaxed">
+                <h2 id="about-heading" class="text-sm font-medium">About</h2>
+                <p class="text-pretty">Proper Holistics is run by Registered Massage Therapists. We carry practitioner-only lines, the formulations normally sold through clinics rather than shelves, and pair them the way we would for a client after treatment.</p>
+                <p class="text-mute text-pretty">Products marked NSF Sport are NSF Certified for Sport and lot-tested for substances banned by WADA, USADA and the NCAA. Competing athletes should verify the current lot at nsfsport.com.</p>
+                <p class="text-mute text-pretty">These products are not intended to diagnose, treat, cure or prevent any disease. Speak with your healthcare provider before starting a new supplement.</p>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer id="contact" class="flex flex-col gap-6 border-t border-line px-6 py-12 text-xs text-mute md:flex-row md:items-center md:justify-between md:px-8">
-        <p>&copy; 2026 Proper Holistics. All rights reserved.</p>
-        <p class="font-mono uppercase tracking-wider">Thorne &middot; Designs for Health &middot; Designs for Sport &middot; AOR</p>
+    <footer id="contact" class="flex flex-col items-center gap-3 px-6 pb-10 text-mute md:flex-row md:justify-between md:px-10">
+        <p>&copy; 2026 Proper Holistics</p>
         <div class="flex gap-6">
-            <a href="#" class="hover:text-ink">Privacy Policy</a>
-            <a href="#" class="hover:text-ink">Terms of Service</a>
+            <a href="mailto:hello@properholistics.com" class="hover:text-ink">Contact</a>
+            <a href="#" class="hover:text-ink">Privacy</a>
+            <a href="#" class="hover:text-ink">Terms</a>
         </div>
     </footer>
 
-    <!-- Stack detail -->
-    <dialog id="stack-dialog" aria-labelledby="stack-dialog-title" class="m-auto w-[min(960px,calc(100%-2rem))] max-w-none bg-paper p-0 text-ink">
+    <dialog id="stack-dialog" aria-labelledby="stack-dialog-title" class="m-auto w-[min(880px,calc(100%-2rem))] max-w-none border border-line bg-paper p-0 text-xs text-ink">
         <div id="stack-dialog-body"></div>
     </dialog>
 
-    <!-- Cart drawer -->
-    <dialog id="cart-dialog" aria-labelledby="cart-title" class="ml-auto mr-0 h-dvh max-h-none w-full max-w-md bg-paper p-0 text-ink">
+    <dialog id="cart-dialog" aria-labelledby="cart-title" class="ml-auto mr-0 h-dvh max-h-none w-full max-w-sm border-l border-line bg-paper p-0 text-xs text-ink">
         <div class="flex h-full flex-col">
-            <div class="flex items-center justify-between border-b border-line p-6">
-                <h2 id="cart-title" class="text-sm font-medium">Cart</h2>
-                <button type="button" data-close class="font-mono text-[11px] uppercase tracking-wider text-mute hover:text-ink">Close</button>
+            <div class="flex items-center justify-between px-6 py-5">
+                <h2 id="cart-title" class="font-medium">Cart</h2>
+                <button type="button" data-close class="text-mute hover:text-ink">Close</button>
             </div>
             <div id="cart-lines" class="flex-1 overflow-y-auto"></div>
-            <div class="flex flex-col gap-4 border-t border-line p-6">
-                <div class="flex items-baseline justify-between text-sm">
+            <div class="flex flex-col gap-4 px-6 py-6">
+                <div class="flex items-baseline justify-between">
                     <span class="text-mute">Subtotal</span>
-                    <span id="cart-total" class="font-medium">$0.00 CAD</span>
+                    <span id="cart-total">$0.00 CAD</span>
                 </div>
-                <button type="button" disabled class="cursor-not-allowed bg-ink py-4 font-mono text-xs uppercase tracking-wider text-paper opacity-40">Checkout &mdash; Coming soon</button>
+                <button type="button" disabled class="cursor-not-allowed bg-ink py-3.5 text-paper opacity-40">Checkout coming soon</button>
             </div>
         </div>
     </dialog>
