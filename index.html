@@ -16,6 +16,7 @@
             --color-ink: #111111;
             --color-mute: #8a8a87;
             --color-line: #ececea;
+            --color-tile: #f4f4f2;
             --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
         }
         dialog::backdrop { background: rgb(255 255 255 / 0.85); }
@@ -28,8 +29,7 @@
         <a href="#top" class="text-sm font-normal tracking-tight" aria-label="Proper Holistics, back to top"><span class="font-semibold">proper</span>holistics</a>
         <nav aria-label="Primary" class="flex items-center gap-6">
             <a href="#shop" class="hover:text-mute">Shop</a>
-            <a href="#stacks" class="hover:text-mute">Stacks</a>
-            <a href="#about" class="hidden hover:text-mute sm:inline">About</a>
+            <a href="#about" class="hover:text-mute">About</a>
             <button type="button" data-open-cart class="hover:text-mute">Cart (<span id="cart-count">0</span>)</button>
         </nav>
     </header>
@@ -46,21 +46,9 @@
             <p class="text-center text-mute text-balance">Practitioner-grade supplements, curated by Registered Massage Therapists.</p>
         </section>
 
-        <section id="shop" aria-label="Shop" class="scroll-mt-16 pb-16">
-            <nav id="category-nav" aria-label="Shop by type" class="sticky top-[60px] z-20 flex justify-start gap-x-6 overflow-x-auto whitespace-nowrap bg-paper px-6 py-3 md:justify-center md:px-10"></nav>
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 px-6 pb-4 pt-1 md:px-10">
-                <div id="brand-filters" role="group" aria-label="Filter by brand" class="contents"></div>
-                <button type="button" id="certified-filter" aria-pressed="false">NSF Certified for Sport</button>
-            </div>
-            <div id="shop-sections" class="flex flex-col"></div>
-        </section>
-
-        <section id="stacks" aria-labelledby="stacks-heading" class="scroll-mt-16 px-6 pb-32 md:px-10">
-            <div class="mb-14 flex flex-col items-center gap-2 text-center">
-                <h2 id="stacks-heading" class="text-sm font-medium">Stacks</h2>
-                <p class="text-mute text-balance">Two products we pair in the treatment room. 10% less than buying separately.</p>
-            </div>
-            <ul id="stacks-grid" class="grid grid-cols-2 gap-x-6 gap-y-16 md:grid-cols-3 md:gap-x-10"></ul>
+        <section id="shop" aria-labelledby="shop-heading" class="scroll-mt-16 px-6 pb-32 pt-12 md:px-10">
+            <h2 id="shop-heading" class="mb-6 text-sm font-medium">The Essentials</h2>
+            <ul id="product-grid" class="grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-x-4"></ul>
         </section>
 
         <section id="about" aria-labelledby="about-heading" class="scroll-mt-16 px-6 pb-32 md:px-10">
