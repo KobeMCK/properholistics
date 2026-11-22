@@ -25,36 +25,29 @@
 <body class="bg-paper font-sans text-xs text-ink antialiased selection:bg-ink selection:text-paper">
 
     <header class="sticky top-0 z-30 flex items-center justify-between bg-paper px-6 py-5 md:px-10">
-        <a href="#top" class="text-sm font-normal tracking-tight" aria-label="Proper Holistics, back to top"><span class="font-semibold">proper</span>holistics</a>
-        <nav aria-label="Primary" class="flex items-center gap-6">
+        <a href="#top" class="text-lg font-normal tracking-tight" aria-label="Proper Holistics, back to top"><span class="font-semibold">proper</span>holistics</a>
+        <nav aria-label="Primary" class="flex items-center gap-6 text-sm">
             <a href="#shop" class="hover:text-mute">Shop</a>
-            <a href="#stacks" class="hover:text-mute">Stacks</a>
-            <a href="#about" class="hidden hover:text-mute sm:inline">About</a>
+            <a href="#about" class="hover:text-mute">About</a>
             <button type="button" data-open-cart class="hover:text-mute">Cart (<span id="cart-count">0</span>)</button>
         </nav>
     </header>
 
     <main id="top">
-        <section class="flex flex-col items-center gap-5 px-6 pb-8 pt-8">
-            <img src="images/running_girl.png" alt="A runner in motion, photographed in soft monochrome light" width="628" height="941" class="h-auto w-full max-w-xs grayscale md:max-w-sm">
+        <section class="flex flex-col items-center gap-6 px-6 pb-12 pt-12">
+            <div class="relative aspect-[4/5] w-full max-w-xl overflow-hidden">
+<img src="images/running_girl.png" alt="A runner in motion, photographed in soft monochrome light" width="628" height="941" class="block h-full w-full object-cover grayscale contrast-125">
+<div class="absolute bottom-0 left-0 flex flex-col gap-1 p-6 text-paper">
+<h1 class="text-base font-medium leading-tight">Holistic Formulations</h1>
+<a href="#shop" class="text-sm underline underline-offset-4 hover:no-underline">Shop the latest supplements</a>
+</div>
+</div>
             <p class="text-center text-mute text-balance">Practitioner-grade supplements, curated by Registered Massage Therapists.</p>
         </section>
 
-        <section id="shop" aria-label="Shop" class="scroll-mt-16 pb-16">
-            <nav id="category-nav" aria-label="Shop by type" class="sticky top-[60px] z-20 flex justify-start gap-x-6 overflow-x-auto whitespace-nowrap bg-paper px-6 py-3 md:justify-center md:px-10"></nav>
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 px-6 pb-4 pt-1 md:px-10">
-                <div id="brand-filters" role="group" aria-label="Filter by brand" class="contents"></div>
-                <button type="button" id="certified-filter" aria-pressed="false">NSF Certified for Sport</button>
-            </div>
-            <div id="shop-sections" class="flex flex-col"></div>
-        </section>
-
-        <section id="stacks" aria-labelledby="stacks-heading" class="scroll-mt-16 px-6 pb-32 md:px-10">
-            <div class="mb-14 flex flex-col items-center gap-2 text-center">
-                <h2 id="stacks-heading" class="text-sm font-medium">Stacks</h2>
-                <p class="text-mute text-balance">Two products we pair in the treatment room. 10% less than buying separately.</p>
-            </div>
-            <ul id="stacks-grid" class="grid grid-cols-2 gap-x-6 gap-y-16 md:grid-cols-3 md:gap-x-10"></ul>
+        <section id="shop" aria-labelledby="shop-heading" class="scroll-mt-16 px-6 pb-32 pt-12 md:px-10">
+            <h2 id="shop-heading" class="mb-6 text-sm font-medium">The Essentials</h2>
+            <ul id="product-grid" class="grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-x-4"></ul>
         </section>
 
         <section id="about" aria-labelledby="about-heading" class="scroll-mt-16 px-6 pb-32 md:px-10">
