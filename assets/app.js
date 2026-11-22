@@ -68,55 +68,58 @@
     "thorne-florasport-20b",
   ].map((id) => productById[id]);
 
-  function productCard(p) {
+  const optionsFor = (category) => products.filter((p) => p.category === category);
+
+  function categoryCard(cover) {
+    const options = optionsFor(cover.category);
+    const from = Math.min(...options.map((p) => p.price));
+    const summary = options.length > 1 ? `${options.length} options &middot; from ${money(from)}` : `${cover.brand} &middot; ${money(from)}`;
     return `
       <li>
-        <button type="button" data-product="${p.id}" aria-haspopup="dialog" class="group flex w-full cursor-pointer flex-col gap-3 text-left">
-          <span class="flex aspect-[4/5] w-full items-center justify-center bg-tile p-8">
-            <img src="${p.image}" alt="${p.brand} ${p.name}" class="max-h-full w-auto object-contain mix-blend-multiply transition-transform duration-300 ease-out group-hover:scale-105 group-focus-visible:scale-105 motion-reduce:transition-none">
+        <button type="button" data-category="${cover.category}" aria-haspopup="dialog" class="group flex w-full cursor-pointer flex-col gap-3 text-left">
+          <span class="flex aspect-square w-full items-center justify-center p-6">
+            <img src="${cover.image}" alt="" class="max-h-full w-auto object-contain mix-blend-multiply transition-transform duration-300 ease-out group-hover:scale-105 group-focus-visible:scale-105 motion-reduce:transition-none">
           </span>
           <span class="flex flex-col gap-1">
-            <span class="font-medium">${p.name}</span>
-            <span class="text-mute">${p.brand} &middot; ${p.category}</span>
-            <span>${money(p.price)}</span>
+            <span class="font-medium">${cover.category}</span>
+            <span class="text-mute">${summary}</span>
           </span>
         </button>
       </li>`;
   }
 
   function renderProducts() {
-    document.getElementById("product-grid").innerHTML = essentials.map(productCard).join("");
+    document.getElementById("product-grid").innerHTML = essentials.map(categoryCard).join("");
   }
 
-  function openProduct(id) {
-    const p = productById[id];
+  function optionRow(p) {
+    return `
+      <li class="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:gap-6">
+        <img src="${p.image}" alt="${p.brand} ${p.name}" class="h-28 w-28 shrink-0 self-center object-contain mix-blend-multiply">
+        <div class="flex min-w-0 flex-1 flex-col gap-1">
+          <p class="font-medium">${p.name}</p>
+          <p class="text-mute">${p.brand}${p.certified ? " &middot; NSF Certified for Sport" : ""} &middot; ${p.format}</p>
+          <p class="mt-1 leading-relaxed text-pretty">${window.PH_DESCRIPTIONS[p.id] || ""}</p>
+        </div>
+        <div class="flex shrink-0 items-center justify-between gap-4 sm:flex-col sm:items-end">
+          <span>${money(p.price)}</span>
+          <button type="button" data-add-product="${p.id}" class="bg-ink px-5 py-2.5 text-paper transition hover:opacity-85">Add to cart</button>
+        </div>
+      </li>`;
+  }
+
+  function openCategory(category) {
+    const options = optionsFor(category);
     document.getElementById("stack-dialog-body").innerHTML = `
-      <div class="grid md:grid-cols-2">
-        <div class="hidden items-center justify-center p-10 md:flex">
-          <img src="${p.image}" alt="${p.brand} ${p.name}" class="max-h-80 w-auto object-contain mix-blend-multiply">
-        </div>
-        <div class="flex max-h-[85vh] flex-col gap-6 overflow-y-auto p-8">
-          <div class="flex items-start justify-between gap-4">
-            <div class="flex flex-col gap-1">
-              <h2 id="stack-dialog-title" class="text-sm font-medium">${p.name}</h2>
-              <p class="text-mute">${p.brand}${p.certified ? " &middot; NSF Certified for Sport" : ""}</p>
-            </div>
-            <button type="button" data-close class="text-mute hover:text-ink">Close</button>
+      <div class="flex max-h-[85vh] flex-col overflow-y-auto px-8 pt-8 pb-2">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex flex-col gap-1">
+            <h2 id="stack-dialog-title" class="text-sm font-medium">${category}</h2>
+            <p class="text-mute">${options.length > 1 ? `${options.length} options from the brands we trust` : "Our pick"}</p>
           </div>
-          <img src="${p.image}" alt="" class="mx-auto max-h-48 w-auto object-contain mix-blend-multiply md:hidden">
-          <p class="leading-relaxed text-pretty">${window.PH_DESCRIPTIONS[p.id] || ""}</p>
-          <dl class="flex flex-col gap-2 text-mute">
-            <div class="flex justify-between gap-4"><dt>Format</dt><dd class="text-ink">${p.format}</dd></div>
-            <div class="flex justify-between gap-4"><dt>Category</dt><dd class="text-ink">${p.category}</dd></div>
-          </dl>
-          <div class="mt-auto flex flex-col gap-4">
-            <div class="flex items-baseline justify-between">
-              <span class="text-mute">Price</span>
-              <span>${money(p.price)}</span>
-            </div>
-            <button type="button" data-add-product="${p.id}" class="bg-ink py-3.5 text-paper transition hover:opacity-85">Add to cart</button>
-          </div>
+          <button type="button" data-close class="text-mute hover:text-ink">Close</button>
         </div>
+        <ul class="flex flex-col divide-y divide-line">${options.map(optionRow).join("")}</ul>
       </div>`;
     document.getElementById("stack-dialog").showModal();
   }
@@ -186,8 +189,8 @@
       if (e.target === t) t.close();
       return;
     }
-    if (t.dataset.product) {
-      openProduct(t.dataset.product);
+    if (t.dataset.category) {
+      openCategory(t.dataset.category);
     } else if (t.dataset.addProduct) {
       document.getElementById("stack-dialog").close();
       addToCart("product", t.dataset.addProduct);
